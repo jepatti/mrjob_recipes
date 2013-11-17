@@ -4,4 +4,4 @@ import random
 start_time = 1384387427
 
 for i in range(10000):
-    print start_time + i, random.randint(0, 500)
+    print start_time + i, (i % 1000) + random.randint(0, 20)
