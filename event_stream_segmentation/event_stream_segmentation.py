@@ -7,8 +7,8 @@ class MRWordCounter(MRJob):
         timestamp, user_id = line.split()
         yield user_id, timestamp
 
-    def reducer(self, word, occurrences):
-        yield word, sorted(occurrences)
+    def reducer(self, uid, timestamps):
+        yield uid, sorted(timestamps)
 
 
 if __name__ == '__main__':
