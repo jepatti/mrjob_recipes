@@ -1,14 +1,14 @@
 from mrjob.job import MRJob
-from itertools import combinations
+from itertools import permutations
 
 
 class MRRecommender(MRJob):
 
     def mapper(self, key, line):
-        account_id, purchases = set(line.split(','))
-        if len(purchases) > 1:
-            for p1, p2 in combinations(purchases, 2):
-                yield (account_id, p1, p2), 1
+        account_id, purchases = line.split()
+        purchases = set(purchases.split(','))
+        for p1, p2 in permutations(purchases, 2):
+            yield (account_id, p1, p2), 1
 
     def reducer(self, word, occurrences):
         account_id, p1, p2 = word
